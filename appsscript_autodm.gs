@@ -67,7 +67,14 @@ function main_() {
       if (st.done.indexOf(key) >= 0 || st.pending[key] || st.replied.indexOf(c.id) >= 0) return;
       const r = call_(IG + "/messages", "POST", { recipient: { comment_id: c.id }, message: { text: FIRST.replace("{me}", me).replace("{name}", info(m.id).name).replace("{link}", info(m.id).link) } });
       st.replied.push(c.id);
-      if (r) st.done.push(key);
+      if (r) {
+        st.done.push(key);
+        // 공개 답글: 같은 문장 반복은 스팸으로 보일 수 있어 여러 문장을 돌려 씀
+        const R = ["@{u} DM으로 보내 드렸어요! 📩 확인해 보세요", "@{u} 자료 DM 보냈어요 🙌 써 보시고 후기 알려 주세요!",
+                   "@{u} 보내 드렸어요! DM함 확인해 주세요 😊", "@{u} DM 확인해 주세요! 15개 다 들어 있어요 ✨",
+                   "@{u} 방금 보냈어요 📮 안 보이면 메시지 요청함도 봐 주세요!"];
+        call_(c.id + "/replies", "POST", { message: R[Math.floor(Math.random() * R.length)].replace("{u}", who.username) });
+      }
       console.log("첫 DM", who.username, r ? "ok" : "실패");
     });
   });
