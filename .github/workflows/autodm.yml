@@ -1,0 +1,30 @@
+name: runlog-autodm
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: autodm
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: 댓글 확인·DM 보내기
+        env:
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+        run: |
+          printf '%s' "$IG_TOKEN" > token.txt
+          python autodm.py
+          rm -f token.txt
+      - name: 보낸 기록 저장
+        run: |
+          git config user.name "runlog-autodm"
+          git config user.email "actions@users.noreply.github.com"
+          git add state.json || true
+          git diff --cached --quiet || (git commit -m "state" && git push)
