@@ -3,28 +3,32 @@ on:
   schedule:
     - cron: "*/5 * * * *"
   workflow_dispatch:
-permissions:
-  contents: write
 concurrency: autodm
 jobs:
   run:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 7
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: 댓글 확인·DM 보내기
+      - name: 보낸 기록 불러오기
+        uses: actions/cache/restore@v4
+        with:
+          path: state.json
+          key: state-${{ github.run_id }}
+          restore-keys: state-
+      - name: 1분 간격으로 5번 확인
         env:
           IG_TOKEN: ${{ secrets.IG_TOKEN }}
         run: |
           printf '%s' "$IG_TOKEN" > token.txt
-          python autodm.py
+          for i in 1 2 3 4 5; do python autodm.py || true; [ $i -lt 5 ] && sleep 55; done
           rm -f token.txt
       - name: 보낸 기록 저장
-        run: |
-          git config user.name "runlog-autodm"
-          git config user.email "actions@users.noreply.github.com"
-          git add state.json || true
-          git diff --cached --quiet || (git commit -m "state" && git push)
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: state.json
+          key: state-${{ github.run_id }}
