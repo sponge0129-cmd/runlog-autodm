@@ -42,8 +42,8 @@ cut = time.time() - DAYS * 86400
 # 게시물별 자료: config의 posts에 있으면 그것, 없으면 default
 def post_info(mid): return CFG.get("posts", {}).get(mid) or CFG["default"]
 
-FIRST = ("댓글 고마워요! 🙌 자료는 @{me} 팔로워분께 보내 드려요.\n"
-         "팔로우하셨다면 이 메시지에 아무 말이나 답장 주세요. 바로 링크 보내 드릴게요!")
+FIRST = ("댓글 고마워요! 🙌 자료 여기 있어요 👇\n「{name}」\n{link}\n\n"
+         "유용했다면 @{me} 팔로우하고 다음 자료도 받아 보세요!")
 
 # 1) 최근 게시물의 새 댓글 → 첫 DM (댓글 하나당 1번, 같은 사람은 1번)
 media = (call(f"{IG_ID}/media", fields="id,timestamp", limit=20) or {}).get("data", [])

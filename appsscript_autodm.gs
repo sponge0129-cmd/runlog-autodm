@@ -3,7 +3,7 @@
 // 게시물별 자료 링크: 깃허브 config.json 을 읽음 (저장소에서 고치면 바로 반영)
 const API = "https://graph.facebook.com/v23.0";
 const CONFIG_URL = "https://raw.githubusercontent.com/sponge0129-cmd/runlog-autodm/master/config.json";
-const FIRST = "댓글 고마워요! 🙌 자료는 @{me} 팔로워분께 보내 드려요.\n팔로우하셨다면 이 메시지에 아무 말이나 답장 주세요. 바로 링크 보내 드릴게요!";
+const FIRST = "댓글 고마워요! 🙌 자료 여기 있어요 👇\n「{name}」\n{link}\n\n유용했다면 @{me} 팔로우하고 다음 자료도 받아 보세요!";
 
 function token_() { return PropertiesService.getScriptProperties().getProperty("IG_TOKEN"); }
 
