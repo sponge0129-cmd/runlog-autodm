@@ -57,8 +57,9 @@ for m in media:
         st["seen"].append(cid)
         if ts(c["timestamp"]) < cut: continue
         if uid in st["done"] or uid in st["pending"]: continue
-        r = send({"comment_id": cid}, FIRST.format(me=ME_NAME))
-        if r: st["pending"][uid] = {"post": m["id"], "user": who.get("username"), "at": int(time.time())}
+        pi = post_info(m["id"])
+        r = send({"comment_id": cid}, FIRST.format(me=ME_NAME, name=pi["name"], link=pi["link"]))
+        if r: st["done"].append(uid)
         print("첫 DM", who.get("username"), "ok" if r else "실패")
 
 # 2) 답장한 사람 → 팔로우 확인 → 링크
