@@ -1,4 +1,9 @@
-{"ig_id": "17841425887325330",
+{
+ "ig_id": "17841425887325330",
  "days": 7,
- "default": {"name": "평면도 → 3D 집 프롬프트 7개", "link": "https://app.notion.com/p/3D-7-Runlog-417593cca1898032924feab2ef51cc08"},
- "posts": {}}
+ "default": {
+  "name": "그림 상황별 완성 프롬프트 15개",
+  "link": "https://viridian-bellflower-eca.notion.site/415593cca189813fa474f7921afe83df"
+ },
+ "posts": {}
+}

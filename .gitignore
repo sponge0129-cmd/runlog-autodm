@@ -3,3 +3,4 @@ log.txt
 *.png
 __pycache__/
 state.json
+token_old.txt
