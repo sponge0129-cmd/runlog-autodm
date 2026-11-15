@@ -71,7 +71,7 @@ function main_() {
         st.done.push(key);
         // 공개 답글: 같은 문장 반복은 스팸으로 보일 수 있어 여러 문장을 돌려 씀
         const R = ["@{u} DM으로 보내 드렸어요! 📩 확인해 보세요", "@{u} 자료 DM 보냈어요 🙌 써 보시고 후기 알려 주세요!",
-                   "@{u} 보내 드렸어요! DM함 확인해 주세요 😊", "@{u} DM 확인해 주세요! 15개 다 들어 있어요 ✨",
+                   "@{u} 보내 드렸어요! DM함 확인해 주세요 😊", "@{u} DM 확인해 주세요! 자료 다 들어 있어요 ✨",
                    "@{u} 방금 보냈어요 📮 안 보이면 메시지 요청함도 봐 주세요!"];
         call_(c.id + "/replies", "POST", { message: R[Math.floor(Math.random() * R.length)].replace("{u}", who.username) });
       }
