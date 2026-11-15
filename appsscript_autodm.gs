@@ -52,12 +52,14 @@ function main_() {
   const me = (call_(IG, "GET", { fields: "username" }) || {}).username || "runlog.ai";
   const now = Date.now(), cut = now - DAYS * 86400000;
   const since = Math.max(cut, (st.wm || 0) - 15 * 60000);   // 15분 겹쳐 읽어 늦게 잡히는 댓글도 놓치지 않음
-  let newest = st.wm || 0;
+  let newest = st.wm || 0, hold = Infinity;
 
   // 1) 새 댓글 → 첫 DM (사람·게시물마다 1번)
   const media = ((call_(IG + "/media", "GET", { fields: "id,timestamp", limit: 20 }) || {}).data) || [];
   media.forEach(m => {
     if (Date.parse(m.timestamp) < cut - 30 * 86400000) return;
+    // 올린 지 15분 안 된 새 게시물인데 config 에 아직 없으면(깃허브 캐시 지연) 기본 자료를 보내지 말고 다음 실행까지 기다림
+    if (!(cfg.posts || {})[m.id] && now - Date.parse(m.timestamp) < 15 * 60000) { hold = Math.min(hold, Date.parse(m.timestamp)); console.log("자료 연결 대기", m.id); return; }
     const cs = ((call_(m.id + "/comments", "GET", { fields: "id,text,timestamp,from{id,username}", limit: 50 }) || {}).data) || [];
     cs.forEach(c => {
       const t = Date.parse(c.timestamp), who = c.from || {};
@@ -78,7 +80,7 @@ function main_() {
       console.log("첫 DM", who.username, r ? "ok" : "실패");
     });
   });
-  st.wm = Math.max(st.wm || 0, Math.min(newest, now));
+  st.wm = Math.max(st.wm || 0, Math.min(newest, now, hold));
 
   // 2) 답장한 사람 → 팔로우 확인 → 링크
   Object.keys(st.pending).forEach(key => {
