@@ -1,22 +1,26 @@
 {
- "ig_id": "17841425887325330",
- "days": 7,
- "default": {
-  "name": "그림 상황별 완성 프롬프트 15개",
-  "link": "https://viridian-bellflower-eca.notion.site/415593cca189813fa474f7921afe83df"
- },
- "posts": {
-  "18011761697778960": {
-   "name": "그림 상황별 완성 프롬프트 15개",
-   "link": "https://viridian-bellflower-eca.notion.site/415593cca189813fa474f7921afe83df"
+  "ig_id": "17841425887325330",
+  "days": 7,
+  "default": {
+    "name": "그림 상황별 완성 프롬프트 15개",
+    "link": "https://viridian-bellflower-eca.notion.site/415593cca189813fa474f7921afe83df"
   },
-  "18113712938243812": {
-   "name": "평면도 → 3D 집 프롬프트 7개",
-   "link": "https://viridian-bellflower-eca.notion.site/417593cca1898032924feab2ef51cc08"
-  },
-  "18167104066494883": {
-   "name": "문장 하나로 3D 웹사이트 — 프롬프트 7개",
-   "link": "https://viridian-bellflower-eca.notion.site/418593cca18981a1adfbc0ce6e2fe87e"
+  "posts": {
+    "18011761697778960": {
+      "name": "그림 상황별 완성 프롬프트 15개",
+      "link": "https://viridian-bellflower-eca.notion.site/415593cca189813fa474f7921afe83df"
+    },
+    "18113712938243812": {
+      "name": "평면도 → 3D 집 프롬프트 7개",
+      "link": "https://viridian-bellflower-eca.notion.site/417593cca1898032924feab2ef51cc08"
+    },
+    "18167104066494883": {
+      "name": "문장 하나로 3D 웹사이트 — 프롬프트 7개",
+      "link": "https://viridian-bellflower-eca.notion.site/418593cca18981a1adfbc0ce6e2fe87e"
+    },
+    "18232897504330148": {
+      "name": "채팅만 쓰면 놓치는 클로드 기능 8가지 — 켜는 순서 + 바로 쓰는 문장",
+      "link": "https://viridian-bellflower-eca.notion.site/419593cca18981c1ae0ae80a928b974a"
+    }
   }
- }
 }
