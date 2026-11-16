@@ -1,6 +1,6 @@
 import json,os,sys,time,urllib.request,urllib.parse
 API="https://graph.facebook.com/v23.0"; H=os.path.dirname(os.path.abspath(__file__))
-T=open(os.path.join(H,"token.txt")).read().strip(); IG=json.load(open(os.path.join(H,"config.json"),encoding="utf8"))["ig_id"]
+T=open(os.path.join(H,"token_insights.txt")).read().strip(); IG=json.load(open(os.path.join(H,"config.json"),encoding="utf8"))["ig_id"]
 capfile=sys.argv[1]; vids=sys.argv[2:]
 cap=open(capfile,encoding="utf8").read().strip()
 def post(path,**p):

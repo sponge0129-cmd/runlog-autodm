@@ -4,7 +4,7 @@ import json, os, time, urllib.parse, urllib.request
 
 API = "https://graph.facebook.com/v23.0"
 HERE = os.path.dirname(os.path.abspath(__file__))
-TOKEN = open(os.path.join(HERE, "token.txt"), encoding="utf8").read().strip()
+TOKEN = open(os.path.join(HERE, "token_insights.txt"), encoding="utf8").read().strip()
 STATE = os.path.join(HERE, "state.json")
 CFG = json.load(open(os.path.join(HERE, "config.json"), encoding="utf8"))
 IG_ID = CFG["ig_id"]                     # runlog.ai 인스타 계정 번호

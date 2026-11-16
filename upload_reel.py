@@ -1,6 +1,6 @@
 import json,os,sys,time,urllib.request,urllib.parse
 API="https://graph.facebook.com/v23.0"
-T=open(os.path.join(os.path.dirname(__file__),"token.txt")).read().strip()
+T=open(os.path.join(os.path.dirname(__file__),"token_insights.txt")).read().strip()
 IG=json.load(open(os.path.join(os.path.dirname(__file__),"config.json"),encoding="utf8"))["ig_id"]
 video,capfile,thumb=sys.argv[1],sys.argv[2],int(sys.argv[3]) if len(sys.argv)>3 else 1500
 cap=open(capfile,encoding="utf8").read().strip()
@@ -10,7 +10,7 @@ def post(path,**p):
     return json.load(r)
 def get(path,**p):
     p["access_token"]=T; return json.load(urllib.request.urlopen(f"{API}/{path}?"+urllib.parse.urlencode(p)))
-c=post(f"{IG}/media",media_type="REELS",upload_type="resumable",caption=cap,share_to_feed="true",thumb_offset=str(thumb))
+c=post(f"{IG}/media",media_type="REELS",upload_type="resumable",caption=cap,share_to_feed="true",thumb_offset=str(thumb),**({"cover_url":os.environ["COVER_URL"]} if os.environ.get("COVER_URL") else {}))
 cid=c["id"]; print("container",cid)
 data=open(video,"rb").read()
 req=urllib.request.Request(c["uri"],data=data,method="POST",headers={"Authorization":f"OAuth {T}","offset":"0","file_size":str(len(data))})
